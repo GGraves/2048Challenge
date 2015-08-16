@@ -14,7 +14,7 @@ Development of this app consists of 1 main component with a service for grid dat
   - [x] Set up single page Angular App
 
 - [ ] 2048 Component Scaffolding:
-  - [ ] Main component directive
+  - [x] Main component directive
   - [ ] Main component template
   - [ ] Sub component directive
   - [ ] Sub component template
