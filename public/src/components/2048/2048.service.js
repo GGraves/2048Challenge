@@ -38,7 +38,7 @@ angular.module('component.2048').factory('Service2048', function() {
     }
     //pull a random position from the openTiles 
     //and set the row and column
-    var randomPosition = Math.floor((Math.random() * openTiles.length) + 1);
+    var randomPosition = Math.floor(Math.random() * openTiles.length);
     var rowPosition = openTiles[randomPosition].row;
     var columnPosition = openTiles[randomPosition].column;
     for(i = 0; i < grid.length; i++) {
