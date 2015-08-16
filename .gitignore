@@ -1,0 +1,12 @@
+#prevent any swap files from sneaking into the repo
+*.swp
+
+#avoid saving any Mac files
+.DS_Store
+
+#don't store libs to repo
+node_modules
+vendor
+
+#ignore contents of bin directory
+bin

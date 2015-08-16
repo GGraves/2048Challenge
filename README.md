@@ -9,8 +9,8 @@ Development of this app consists of 1 main component with a service for grid dat
 ```
 
 - [ ] Application Prep:
-  - [ ] Set up Node.js 
-  - [ ] Acquire needed libs 
+  - [x] Set up Node.js 
+  - [x] Acquire needed libs 
   - [ ] Set up single page Angular App
 
 - [ ] 2048 Component Scaffolding:
