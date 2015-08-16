@@ -8,10 +8,10 @@ The game 2048 written with AngularJS.
 Development of this app consists of 1 main component with a service for grid data manipulation and one sub component for tile presentation.
 ```
 
-- [ ] Application Prep:
+- [x] Application Prep:
   - [x] Set up Node.js 
   - [x] Acquire needed libs 
-  - [ ] Set up single page Angular App
+  - [x] Set up single page Angular App
 
 - [ ] 2048 Component Scaffolding:
   - [ ] Main component directive
