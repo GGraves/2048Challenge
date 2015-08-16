@@ -28,7 +28,7 @@ Development of this app consists of 1 main component with a service for grid dat
 
 - [ ] tile.js (sub-component): 
   - [x] Property Declarations
-  - [ ] Template Layout and Data Binding
+  - [x] Template Layout and Data Binding
 
 - [ ] 2048.service.js:
   - [ ] Generate Initial Boardstate

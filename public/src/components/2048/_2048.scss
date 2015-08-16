@@ -1,0 +1,24 @@
+.game2048 {
+
+  .grid-row {
+    @import "./tile/tile";
+    align-content:stretch;
+    align-items:stretch;
+    display:flex;
+    display:-webkit-flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    -webkit-align-content:stretch;
+    -webkit-align-items:stretch;
+    -webkit-flex-direction:row;
+    -webkit-flex-wrap:nowrap;
+    -webkit-justify-content:flext-start;
+
+    height: 100px;
+    background: pink;
+    width: 500px;
+
+  }
+
+}
