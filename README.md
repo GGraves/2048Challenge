@@ -13,12 +13,12 @@ Development of this app consists of 1 main component with a service for grid dat
   - [x] Acquire needed libs 
   - [x] Set up single page Angular App
 
-- [ ] 2048 Component Scaffolding:
+- [x] 2048 Component Scaffolding:
   - [x] Main component directive
   - [x] Main component template
   - [x] Sub component directive
-  - [ ] Sub component template
-  - [ ] Component Service 
+  - [x] Sub component template
+  - [x] Component Service 
 
 - [ ] 2048.js (main-component):
   - [ ] Property Declarations
