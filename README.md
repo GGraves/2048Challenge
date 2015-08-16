@@ -22,12 +22,12 @@ Development of this app consists of 1 main component with a service for grid dat
 
 - [ ] 2048.js (main-component):
   - [x] Property Declarations
-  - [ ] Template Layout and Data Binding
+  - [x] Template Layout and Data Binding
   - [ ] Game Driver 
   - [ ] Event Listeners (Arrow Key / Arrow Button)
 
 - [ ] tile.js (sub-component): 
-  - [ ] Property Declarations
+  - [x] Property Declarations
   - [ ] Template Layout and Data Binding
 
 - [ ] 2048.service.js:

@@ -3,12 +3,13 @@ angular.module('component.2048')
   return {
     restrict: 'E',
     replace: 'true',
-    scope: {},
+    scope: {
+      tileObject: '@'
+    },
     templateUrl: '/src/components/2048/tile/tile.html',
-    controllerAs: 'tile',
-    bindToController: true,
-    controller: function() {
-      var self = this;
+    link: function(scope, elem, attrs){
+      var tile = JSON.parse(scope.tileObject);
+      scope.value = tile.value; 
     }
   };
 });

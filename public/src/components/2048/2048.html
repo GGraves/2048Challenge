@@ -2,6 +2,10 @@
 
   <h3> Main component injected!!! </h3>
 
-  <gg-tile></gg-tile>
+  <div class="grid-row" ng-repeat="row in board.grid">
+
+    <gg-tile ng-repeat="tile in row" tile-object="{{tile}}"></gg-tile>
+
+  </div>
 
 </div>
