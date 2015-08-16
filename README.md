@@ -15,7 +15,7 @@ Development of this app consists of 1 main component with a service for grid dat
 
 - [ ] 2048 Component Scaffolding:
   - [x] Main component directive
-  - [ ] Main component template
+  - [x] Main component template
   - [ ] Sub component directive
   - [ ] Sub component template
   - [ ] Component Service 
