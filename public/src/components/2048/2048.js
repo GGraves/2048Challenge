@@ -12,13 +12,27 @@ angular.module('component.2048')
       var self = this;
       var gridSize = 4;
       self.grid = Service2048.generateGrid(gridSize);
-      //temp grid
-      /*
-      self.grid = [ [{'value': 2},{'value': ''},{'value': 4},{'value': ''}],
-                    [{'value': ''},{'value': ''},{'value': ''},{'value': ''}],
-                    [{'value': ''},{'value': 2},{'value': ''},{'value': ''}],
-                    [{'value': ''},{'value': ''},{'value': ''},{'value': ''}]];
-      */
+
+      //window arrow keypress events
+      angular.element(window).on('keydown', function(event) {
+        var key = (event.keyCode || event.which);
+        if(key === 38) {
+          console.log('up');
+          //self.grid = Service2048.updateGrid(self.grid);
+        }
+        if(key === 37) {
+          console.log('left');
+          //self.grid = Service2048.updateGrid(self.grid);
+        }
+        if(key === 40) {
+          console.log('down');
+          //self.grid = Service2048.updateGrid(self.grid);
+        }
+        if(key === 39) {
+          console.log('right');
+          //self.grid = Service2048.updateGrid(self.grid);
+        } 
+      });
       
     }
   };
