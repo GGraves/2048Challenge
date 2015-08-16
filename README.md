@@ -33,7 +33,7 @@ Development of this app consists of 1 main component with a service for grid dat
   - [ ] Template CSS
 
 - [ ] 2048.service.js:
-  - [ ] Generate Initial Boardstate
+  - [x] Generate Initial Boardstate
   - [ ] Grid Update
   - [ ] Insert new tile
 

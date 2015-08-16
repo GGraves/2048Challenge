@@ -11,13 +11,14 @@ angular.module('component.2048')
  
       var self = this;
       var gridSize = 4;
-      //self.grid = Service2048.generateGrid(gridSize);
-
+      self.grid = Service2048.generateGrid(gridSize);
       //temp grid
+      /*
       self.grid = [ [{'value': 2},{'value': ''},{'value': 4},{'value': ''}],
                     [{'value': ''},{'value': ''},{'value': ''},{'value': ''}],
                     [{'value': ''},{'value': 2},{'value': ''},{'value': ''}],
                     [{'value': ''},{'value': ''},{'value': ''},{'value': ''}]];
+      */
       
     }
   };
