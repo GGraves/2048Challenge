@@ -1,4 +1,4 @@
-angular.module('game.services').factory('Service2048', function() {
+angular.module('component.2048').factory('Service2048', function() {
   
   return {
     skelly: skelly

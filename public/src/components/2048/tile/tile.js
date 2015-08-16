@@ -1,4 +1,4 @@
-angular.module('game.directives')
+angular.module('component.2048')
 .directive('ggTile', function() {
   return {
     restrict: 'E',
