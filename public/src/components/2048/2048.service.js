@@ -1,12 +1,26 @@
 angular.module('component.2048').factory('Service2048', function() {
   
   return {
+    boardChanged: boardChanged,
     generateGrid: generateGrid,
     isGridLocked: isGridLocked,
     newTile: newTile,
     updateGrid: updateGrid,
     resetMergeable: resetMergeable 
   };
+  
+  function boardChanged(newGrid, oldGrid) {
+    var gridLength = newGrid.board.length;
+    var changed = false;
+    for(var i = 0; i < gridLength; i++) {
+      for(var j = 0; j < gridLength; j++) {
+        if(newGrid.board[i][j].value !== oldGrid.board[i][j].value) {
+          changed = true; 
+        }
+      }
+    }
+    return changed;
+  }
 
   function generateGrid(gridSize) {
     //build out grid based on gridSize
@@ -124,6 +138,7 @@ angular.module('component.2048').factory('Service2048', function() {
              grid.board[i][j - 1].mergeable === true &&
              grid.board[i][j - 1].value === grid.board[i][j].value) {
             grid.board[i][j - 1].value += grid.board[i][j].value;
+            grid.score += grid.board[i][j - 1].value;
             grid.board[i][j - 1].mergeable = false;
             grid.board[i][j].value = '';
           }
@@ -159,6 +174,7 @@ angular.module('component.2048').factory('Service2048', function() {
              grid.board[i][j + 1].mergeable === true &&
              grid.board[i][j + 1].value === grid.board[i][j].value) {
             grid.board[i][j + 1].value += grid.board[i][j].value;
+            grid.score += grid.board[i][j + 1].value;
             grid.board[i][j + 1].mergeable = false;
             grid.board[i][j].value = '';
           }
@@ -194,6 +210,7 @@ angular.module('component.2048').factory('Service2048', function() {
              grid.board[i - 1][j].mergeable === true &&
              grid.board[i - 1][j].value === grid.board[i][j].value) {
             grid.board[i - 1][j].value += grid.board[i][j].value;
+            grid.score += grid.board[i - 1][j].value;
             grid.board[i - 1][j].mergeable = false;
             grid.board[i][j].value = '';
           }
@@ -229,6 +246,7 @@ angular.module('component.2048').factory('Service2048', function() {
              grid.board[i + 1][j].mergeable === true &&
              grid.board[i + 1][j].value === grid.board[i][j].value) {
             grid.board[i + 1][j].value += grid.board[i][j].value;
+            grid.score += grid.board[i + 1][j].value;
             grid.board[i + 1][j].mergeable = false;
             grid.board[i][j].value = '';
           }

@@ -1,5 +1,12 @@
 <div class="game2048">
-  <div class="grid-row" ng-repeat="row in game.grid.board">
-    <gg-tile ng-repeat="tile in row" tile-object="{{tile}}"></gg-tile>
+  <div>
+    <h3>
+      Score: {{game.grid.score}}
+    </h3>
+  </div>
+  <div class="board">
+    <div class="grid-row" ng-repeat="row in game.grid.board">
+      <gg-tile ng-repeat="tile in row" tile-object="{{tile}}"></gg-tile>
+    </div>
   </div>
 </div>

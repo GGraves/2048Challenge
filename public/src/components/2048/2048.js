@@ -24,12 +24,17 @@ angular.module('component.2048')
       }
 
       function gameDriver(key) {
+        var oldGrid = self.grid;
         for(var i = 0; i < gridSize; i++) {
           self.grid = Service2048.updateGrid(self.grid, key);
           $scope.$apply();
         }
-        if(!Service2048.isGridLocked(self.grid)) {
+        if(Service2048.boardChanged(self.grid, oldGrid) && !Service2048.isGridLocked(self.grid)) {
           self.grid = Service2048.resetMergeable(Service2048.newTile(self.grid));
+          $scope.$apply();
+        }
+        if(!Service2048.boardChanged(self.grid, oldGrid) && !Service2048.isGridLocked(self.grid)) {
+          self.grid = Service2048.resetMergeable(self.grid);
           $scope.$apply();
         }
       }
