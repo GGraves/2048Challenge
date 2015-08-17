@@ -10,6 +10,7 @@ angular.module('component.2048')
     link: function(scope, elem, attrs){
       var tile = JSON.parse(scope.tileObject);
       scope.value = tile.value; 
+      scope.tileColor = 'tile-' + tile.value;
     }
   };
 });

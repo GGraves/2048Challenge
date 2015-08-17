@@ -1,8 +1,84 @@
 .grid-tile {
-
-  margin: 10px;
-  width: 10px;
-  background: white;
+  margin:7px;
   flex: 1;
+  align-content:stretch;
+  align-items:stretch;
+  display:flex;
+  display:-webkit-flex;
+  flex-direction:row;
+  flex-wrap:nowrap;
+  justify-content:flex-start;
+  -webkit-align-content:stretch;
+  -webkit-align-items:stretch;
+  -webkit-flex-direction:row;
+  -webkit-flex-wrap:nowrap;
+  -webkit-justify-content:flext-start;
+  
+  border-radius: 3px;
+  background: rgba(238, 228, 218, 0.35);
 
+  -webkit-transition: 100ms ease-in-out;
+  -moz-transition: 100ms ease-in-out;
+  transition: 100ms ease-in-out;
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  transition-property: transform;
+
+  h1 {
+    flex:1;
+    align-self:center;
+    text-align:center;
+    -webkit-align-self:center;
+    font-weight: bold;
+    font-size: 30px; 
+  }
+  &.tile-2 {
+    background: #eee4da;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); 
+  }
+  &.tile-4 {
+    background: #ede0c8;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); 
+  }
+  &.tile-8 {
+    color: #f9f6f2;
+    background: #f2b179; 
+  }
+  &.tile-16 {
+    color: #f9f6f2;
+    background: #f59563; 
+  }
+  &.tile-32 {
+    color: #f9f6f2;
+    background: #f67c5f; 
+  }
+  &.tile-64 {
+    color: #f9f6f2;
+    background: #f65e3b; 
+  }
+  &.tile-128 {
+    color: #f9f6f2;
+    background: #edcf72;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
+  }
+  &.tile-256 {
+    color: #f9f6f2;
+    background: #edcc61;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.31746), inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
+  }
+  &.tile-512 {
+    color: #f9f6f2;
+    background: #edc850;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.39683), inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
+  }
+  &.tile-1024 {
+    color: #f9f6f2;
+    background: #edc53f;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.47619), inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
+  }
+  &.tile-2048 {
+    color: #f9f6f2;
+    background: #edc22e;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.55556), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+  }
 }

@@ -12,6 +12,7 @@ angular.module('component.2048')
       var myStorage = localStorage;
       var gridSize = 4;
       self.grid = Service2048.generateGrid(gridSize);
+      self.message = '';
       self.newGame = newGame;
       self.topScore = myStorage.getItem("topScore") ? myStorage.getItem("topScore") : 'No Top Score'; 
       self.gridLocked = false;
@@ -25,7 +26,8 @@ angular.module('component.2048')
 
       function newGame() {
         //reset game
-        self.gridLocked = false;
+        self.modal = false;
+        self.message = '';
         self.grid = Service2048.generateGrid(gridSize);
       }
 
@@ -58,9 +60,15 @@ angular.module('component.2048')
           self.grid = Service2048.resetMergeable(self.grid);
           $scope.$apply();
         }
+        if(Service2048.playerWins(self.grid)) {
+          //set scope var to true to visually change the state of the app
+          self.modal = true;    
+          self.message = 'PLAYER WINS!';
+        }
         if(Service2048.isGridLocked(self.grid)) {
           //set scope var to true to visually change the state of the app
-          self.gridLocked = true;    
+          self.modal = true;    
+          self.message = 'GAME OVER';
         }
       }
     }

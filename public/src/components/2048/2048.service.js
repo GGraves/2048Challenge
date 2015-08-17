@@ -5,6 +5,7 @@ angular.module('component.2048').factory('Service2048', function() {
     generateGrid: generateGrid,
     isGridLocked: isGridLocked,
     newTile: newTile,
+    playerWins: playerWins,
     updateGrid: updateGrid,
     resetMergeable: resetMergeable 
   };
@@ -108,6 +109,20 @@ angular.module('component.2048').factory('Service2048', function() {
       }
     }
     return angular.copy(grid);
+  }
+  
+  function playerWins(grid) {
+    //check to see if the board is in a win state
+    var gridLength = grid.board.length;
+    var changed = false;
+    for(var i = 0; i < gridLength; i++) {
+      for(var j = 0; j < gridLength; j++) {
+        if(grid.board[i][j].value === 2048) {
+          changed = true; 
+        }
+      }
+    }
+    return changed;
   }
   
   function resetMergeable(grid) {

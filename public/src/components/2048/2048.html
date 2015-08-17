@@ -1,7 +1,9 @@
 <div class="game2048">
 
   <div class="main-header">
-    <h1>2048</h1>
+    <div class="title">
+      <h1>2048</h1>
+    </div>
     <div class="stats">
       <div>
         <h5>SCORE</h5>
@@ -19,7 +21,11 @@
   </div>
 
   <div class="board">
-    <div ng-if="game.gridLocked"> Game Over </div>
+    <div class="modal" ng-if="game.modal"> 
+      <h1>
+        {{game.message}} 
+      </h1>
+    </div>
     <div class="grid-row" ng-repeat="row in game.grid.board">
       <gg-tile ng-repeat="tile in row" tile-object="{{tile}}"></gg-tile>
     </div>
