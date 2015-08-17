@@ -10,6 +10,7 @@ angular.module('component.2048').factory('Service2048', function() {
   };
   
   function boardChanged(newGrid, oldGrid) {
+    //check to see if the board has Changed
     var gridLength = newGrid.board.length;
     var changed = false;
     for(var i = 0; i < gridLength; i++) {
@@ -44,6 +45,8 @@ angular.module('component.2048').factory('Service2048', function() {
   }
   
   function isGridLocked(grid) {
+    //check to see if the Grid is locked up
+    //by checking current iterators neighbors
     var gridLength = grid.board.length;
     var locked = true;
     for(var i = 0; i < gridLength; i++) {
@@ -74,6 +77,7 @@ angular.module('component.2048').factory('Service2048', function() {
   }
   
   function newTile(grid) {
+    //add a new tile to the grid if able
     var openTiles = [],
         gridLength = grid.board.length,
         i=0,
@@ -107,6 +111,7 @@ angular.module('component.2048').factory('Service2048', function() {
   }
   
   function resetMergeable(grid) {
+    //reset all tiles to mergeable
     var gridLength = grid.board.length;
     for(var i = 0; i < gridLength; i++) {
       for(var j = 0; j < gridLength; j++) {
@@ -116,7 +121,7 @@ angular.module('component.2048').factory('Service2048', function() {
     return grid;
   }
 
-  //The Dream: combine these directional methods into on method with conditional direction logic
+  //The Dream: combine these directional methods into one method with conditional direction logic
   //The Dream Killer: Time constraints.
   function leftShift(grid) {
     var gridLength = grid.board.length;
@@ -263,6 +268,7 @@ angular.module('component.2048').factory('Service2048', function() {
   }
  
   function updateGrid(grid, key) {
+    //updateGrid driver
     var updatedGrid;
     
     if(key === 37)      { updatedGrid = leftShift(angular.copy(grid));}    

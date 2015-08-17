@@ -24,18 +24,25 @@ angular.module('component.2048')
       });
 
       function newGame() {
+        //reset game
         self.gridLocked = false;
         self.grid = Service2048.generateGrid(gridSize);
       }
 
       function gameDriver(key) {
+        //main game loop
         var oldGrid = self.grid;
         for(var i = 0; i < gridSize; i++) {
+          //calculate change in board state
           self.grid = Service2048.updateGrid(self.grid, key);
           $scope.$apply();
         }
         if(Service2048.boardChanged(self.grid, oldGrid) && !Service2048.isGridLocked(self.grid)) {
+          //if the board has changed and the grid isnt locked up
+          //add a new random tile 
           self.grid = Service2048.resetMergeable(Service2048.newTile(self.grid));
+
+          //set current and or topscore
           if(self.topScore === 'No Top Score' && self.grid.score > 0) {
             self.topScore = self.grid.score;
             myStorage.setItem('topScore', self.grid.score);
@@ -46,10 +53,13 @@ angular.module('component.2048')
           $scope.$apply();
         }
         if(!Service2048.boardChanged(self.grid, oldGrid) && !Service2048.isGridLocked(self.grid)) {
+          //if the board hasnt changed and the grid isnt locked
+          //make sure that all tiles are set to mergeable
           self.grid = Service2048.resetMergeable(self.grid);
           $scope.$apply();
         }
         if(Service2048.isGridLocked(self.grid)) {
+          //set scope var to true to visually change the state of the app
           self.gridLocked = true;    
         }
       }

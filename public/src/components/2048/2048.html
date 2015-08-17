@@ -1,21 +1,25 @@
 <div class="game2048">
-  <div>
-    <h3>
-      Score: {{game.grid.score}}
-    </h3>
+
+  <div class="main-header">
+    <h1>2048</h1>
+    <div class="stats">
+      <div>
+        <h5>SCORE</h5>
+        <h3>{{game.grid.score}}</h3>
+      </div>
+      <div>
+        <h5>BEST</h5>
+        <h3>{{game.topScore}}</h3>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <h3>
-      Top Score: {{game.topScore}}
-    </h3>
-  </div>
-
-  <div>
-    <button ng-click="game.newGame()">New Game</button>
+  <div class="sub-header">
+    <div ng-click="game.newGame()">New Game</div>
   </div>
 
   <div class="board">
+    <div ng-if="game.gridLocked"> Game Over </div>
     <div class="grid-row" ng-repeat="row in game.grid.board">
       <gg-tile ng-repeat="tile in row" tile-object="{{tile}}"></gg-tile>
     </div>
