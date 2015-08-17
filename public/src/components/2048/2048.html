@@ -4,6 +4,17 @@
       Score: {{game.grid.score}}
     </h3>
   </div>
+
+  <div>
+    <h3>
+      Top Score: {{game.topScore}}
+    </h3>
+  </div>
+
+  <div>
+    <button ng-click="game.newGame()">New Game</button>
+  </div>
+
   <div class="board">
     <div class="grid-row" ng-repeat="row in game.grid.board">
       <gg-tile ng-repeat="tile in row" tile-object="{{tile}}"></gg-tile>
