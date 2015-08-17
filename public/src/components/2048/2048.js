@@ -28,8 +28,10 @@ angular.module('component.2048')
           self.grid = Service2048.updateGrid(self.grid, key);
           $scope.$apply();
         }
-        self.grid = Service2048.resetMergeable(Service2048.newTile(self.grid));
-        $scope.$apply();
+        if(!Service2048.isGridLocked(self.grid)) {
+          self.grid = Service2048.resetMergeable(Service2048.newTile(self.grid));
+          $scope.$apply();
+        }
       }
     }
   };

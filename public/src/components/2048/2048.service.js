@@ -2,6 +2,7 @@ angular.module('component.2048').factory('Service2048', function() {
   
   return {
     generateGrid: generateGrid,
+    isGridLocked: isGridLocked,
     newTile: newTile,
     updateGrid: updateGrid,
     resetMergeable: resetMergeable 
@@ -25,7 +26,37 @@ angular.module('component.2048').factory('Service2048', function() {
     newTile(grid);
     return grid;
   }
-
+  
+  function isGridLocked(grid) {
+    var gridLength = grid.length;
+    var locked = true;
+    for(var i = 0; i < gridLength; i++) {
+      for(var j = 0; j < gridLength; j++) {
+        if( grid[i][j-1] !== undefined) {
+          if(grid[i][j-1].value === '' || grid[i][j-1].value === grid[i][j].value) {
+            locked = false; 
+          }
+        }
+        if( grid[i][j+1] !== undefined) {
+          if(grid[i][j+1].value === '' || grid[i][j+1].value === grid[i][j].value) {
+            locked = false; 
+          }
+        }
+        if( i !== 0 && grid[i-1][j] !== undefined) {
+          if(grid[i-1][j].value === '' || grid[i-1][j].value === grid[i][j].value) {
+            locked = false; 
+          }
+        }
+        if( i !== gridLength-1 && grid[i+1][j] !== undefined) {
+          if(grid[i+1][j].value === '' || grid[i+1][j].value === grid[i][j].value) {
+            locked = false; 
+          }
+        }
+      }
+    }
+    return locked;
+  }
+  
   function newTile(grid) {
     var openTiles = [],
         gridLength = grid.length,
@@ -43,14 +74,16 @@ angular.module('component.2048').factory('Service2048', function() {
     //pull a random position from the openTiles 
     //and set the row and column
     var randomPosition = Math.floor(Math.random() * openTiles.length);
-    var rowPosition = openTiles[randomPosition].row;
-    var columnPosition = openTiles[randomPosition].column;
-    for(i = 0; i < gridLength; i++) {
-      for(j = 0; j < gridLength; j++) {
-        if(i === rowPosition && j === columnPosition) {
-          //assign tile to the # 2 or 4
-          //90% chance 2, 10% chance 4
-          grid[i][j].value = (Math.floor((Math.random() * 10) + 1)) <= 9 ? 2 : 4;
+    if(openTiles.length) {
+      var rowPosition = openTiles[randomPosition].row;
+      var columnPosition = openTiles[randomPosition].column;
+      for(i = 0; i < gridLength; i++) {
+        for(j = 0; j < gridLength; j++) {
+          if(i === rowPosition && j === columnPosition) {
+            //assign tile to the # 2 or 4
+            //90% chance 2, 10% chance 4
+            grid[i][j].value = (Math.floor((Math.random() * 10) + 1)) <= 9 ? 2 : 4;
+          }
         }
       }
     }
@@ -220,5 +253,4 @@ angular.module('component.2048').factory('Service2048', function() {
     return updatedGrid;
   }
 
-  
 });
