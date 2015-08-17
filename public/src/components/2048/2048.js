@@ -15,10 +15,22 @@ angular.module('component.2048')
         //window arrow keypress events
         var key = (event.keyCode || event.which);
         if(key > 36 && key < 41) {
+          gameDriver(key);
+        }
+      });
+
+      function restartGame() {
+        
+      }
+
+      function gameDriver(key) {
+        for(var i = 0; i < gridSize; i++) {
           self.grid = Service2048.updateGrid(self.grid, key);
           $scope.$apply();
         }
-      });
+        self.grid = Service2048.resetMergeable(Service2048.newTile(self.grid));
+        $scope.$apply();
+      }
     }
   };
 });
