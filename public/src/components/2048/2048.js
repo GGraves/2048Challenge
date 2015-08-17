@@ -14,6 +14,7 @@ angular.module('component.2048')
       self.grid = Service2048.generateGrid(gridSize);
       self.newGame = newGame;
       self.topScore = myStorage.getItem("topScore") ? myStorage.getItem("topScore") : 'No Top Score'; 
+      self.gridLocked = false;
       angular.element(window).on('keydown', function(event) {
         //window arrow keypress events
         var key = (event.keyCode || event.which);
@@ -23,6 +24,7 @@ angular.module('component.2048')
       });
 
       function newGame() {
+        self.gridLocked = false;
         self.grid = Service2048.generateGrid(gridSize);
       }
 
@@ -48,7 +50,7 @@ angular.module('component.2048')
           $scope.$apply();
         }
         if(Service2048.isGridLocked(self.grid)) {
-          
+          self.gridLocked = true;    
         }
       }
     }

@@ -24,7 +24,7 @@ Development of this app consists of 1 main component with a service for grid dat
   - [x] Property Declarations
   - [x] Template Layout and Data Binding
   - [ ] Template CSS
-  - [ ] Game Driver 
+  - [x] Game Driver 
   - [x] Arrow Key Event Listeners
 
 - [ ] tile.js (sub-component): 
