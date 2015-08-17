@@ -10,7 +10,9 @@ angular.module('component.2048').factory('Service2048', function() {
 
   function generateGrid(gridSize) {
     //build out grid based on gridSize
-    var grid = [];
+    var grid = {};
+    grid.score = 0;
+    grid.board = [];
     for(var i = 0; i < gridSize; i++) {
       var row = [];
       for(var j = 0; j < gridSize; j++) {
@@ -19,7 +21,7 @@ angular.module('component.2048').factory('Service2048', function() {
         tileObject.mergeable = true;
         row.push(tileObject);
       }
-      grid.push(row);
+      grid.board.push(row);
     }
     //insert two random tiles
     newTile(grid);
@@ -28,27 +30,27 @@ angular.module('component.2048').factory('Service2048', function() {
   }
   
   function isGridLocked(grid) {
-    var gridLength = grid.length;
+    var gridLength = grid.board.length;
     var locked = true;
     for(var i = 0; i < gridLength; i++) {
       for(var j = 0; j < gridLength; j++) {
-        if( grid[i][j-1] !== undefined) {
-          if(grid[i][j-1].value === '' || grid[i][j-1].value === grid[i][j].value) {
+        if( grid.board[i][j-1] !== undefined) {
+          if(grid.board[i][j-1].value === '' || grid.board[i][j-1].value === grid.board[i][j].value) {
             locked = false; 
           }
         }
-        if( grid[i][j+1] !== undefined) {
-          if(grid[i][j+1].value === '' || grid[i][j+1].value === grid[i][j].value) {
+        if( grid.board[i][j+1] !== undefined) {
+          if(grid.board[i][j+1].value === '' || grid.board[i][j+1].value === grid.board[i][j].value) {
             locked = false; 
           }
         }
-        if( i !== 0 && grid[i-1][j] !== undefined) {
-          if(grid[i-1][j].value === '' || grid[i-1][j].value === grid[i][j].value) {
+        if( i !== 0 && grid.board[i-1][j] !== undefined) {
+          if(grid.board[i-1][j].value === '' || grid.board[i-1][j].value === grid.board[i][j].value) {
             locked = false; 
           }
         }
-        if( i !== gridLength-1 && grid[i+1][j] !== undefined) {
-          if(grid[i+1][j].value === '' || grid[i+1][j].value === grid[i][j].value) {
+        if( i !== gridLength-1 && grid.board[i+1][j] !== undefined) {
+          if(grid.board[i+1][j].value === '' || grid.board[i+1][j].value === grid.board[i][j].value) {
             locked = false; 
           }
         }
@@ -59,13 +61,13 @@ angular.module('component.2048').factory('Service2048', function() {
   
   function newTile(grid) {
     var openTiles = [],
-        gridLength = grid.length,
+        gridLength = grid.board.length,
         i=0,
         j=0;
     for(i = 0; i < gridLength; i++) {
       for(j = 0; j < gridLength; j++) {
         //find open tiles
-        if(grid[i][j].value === '') {
+        if(grid.board[i][j].value === '') {
           var tilePosition = {'row': i, 'column': j};
           openTiles.push(tilePosition); 
         } 
@@ -82,7 +84,7 @@ angular.module('component.2048').factory('Service2048', function() {
           if(i === rowPosition && j === columnPosition) {
             //assign tile to the # 2 or 4
             //90% chance 2, 10% chance 4
-            grid[i][j].value = (Math.floor((Math.random() * 10) + 1)) <= 9 ? 2 : 4;
+            grid.board[i][j].value = (Math.floor((Math.random() * 10) + 1)) <= 9 ? 2 : 4;
           }
         }
       }
@@ -91,10 +93,10 @@ angular.module('component.2048').factory('Service2048', function() {
   }
   
   function resetMergeable(grid) {
-    var gridLength = grid.length;
+    var gridLength = grid.board.length;
     for(var i = 0; i < gridLength; i++) {
       for(var j = 0; j < gridLength; j++) {
-        grid[i][j].mergeable = true;
+        grid.board[i][j].mergeable = true;
       }
     }
     return grid;
@@ -103,33 +105,33 @@ angular.module('component.2048').factory('Service2048', function() {
   //The Dream: combine these directional methods into on method with conditional direction logic
   //The Dream Killer: Time constraints.
   function leftShift(grid) {
-    var gridLength = grid.length;
+    var gridLength = grid.board.length;
     for(var i = 0; i < gridLength; i++) {
       for(var j = 0; j < gridLength; j++) {
         //guard against out of bounds errors
         if(j > 0) {
           //prevent doublemerge
-          if(grid[i][j - 1].value > 0 &&
-             grid[i][j - 1].mergeable === true &&
-             grid[i][j].value !== '' &&
-             grid[i][j - 1].value !== grid[i][j].value) {
-            grid[i][j - 1].mergeable = false;
+          if(grid.board[i][j - 1].value > 0 &&
+             grid.board[i][j - 1].mergeable === true &&
+             grid.board[i][j].value !== '' &&
+             grid.board[i][j - 1].value !== grid.board[i][j].value) {
+            grid.board[i][j - 1].mergeable = false;
           }
           //if the next tile is a number with
           //an equal value and mergeable = true
           //merge values and set mergeable to false 
-          if(grid[i][j - 1].value > 0 && 
-             grid[i][j - 1].mergeable === true &&
-             grid[i][j - 1].value === grid[i][j].value) {
-            grid[i][j - 1].value += grid[i][j].value;
-            grid[i][j - 1].mergeable = false;
-            grid[i][j].value = '';
+          if(grid.board[i][j - 1].value > 0 && 
+             grid.board[i][j - 1].mergeable === true &&
+             grid.board[i][j - 1].value === grid.board[i][j].value) {
+            grid.board[i][j - 1].value += grid.board[i][j].value;
+            grid.board[i][j - 1].mergeable = false;
+            grid.board[i][j].value = '';
           }
           //if the next tile is empty
           //set that tile to the current value
-          if(grid[i][j - 1].value === '') {
-            grid[i][j - 1].value = grid[i][j].value;
-            grid[i][j].value = '';
+          if(grid.board[i][j - 1].value === '') {
+            grid.board[i][j - 1].value = grid.board[i][j].value;
+            grid.board[i][j].value = '';
           }
         }
       } 
@@ -138,33 +140,33 @@ angular.module('component.2048').factory('Service2048', function() {
   }
 
   function rightShift(grid) {
-    var gridLength = grid.length-1;
+    var gridLength = grid.board.length-1;
     for(var i = gridLength; i >= 0; i--) {
       for(var j = gridLength; j >= 0; j--) {
         //guard against out of bounds errors
         if(j < gridLength) {
           //prevent doublemerge
-          if(grid[i][j + 1].value > 0 &&
-             grid[i][j + 1].mergeable === true &&
-             grid[i][j].value !== '' &&
-             grid[i][j + 1].value !== grid[i][j].value) {
-            grid[i][j + 1].mergeable = false;
+          if(grid.board[i][j + 1].value > 0 &&
+             grid.board[i][j + 1].mergeable === true &&
+             grid.board[i][j].value !== '' &&
+             grid.board[i][j + 1].value !== grid.board[i][j].value) {
+            grid.board[i][j + 1].mergeable = false;
           }
           //if the next tile is a number with
           //an equal value and mergeable = true
           //merge values and set mergeable to false 
-          if(grid[i][j + 1].value > 0 && 
-             grid[i][j + 1].mergeable === true &&
-             grid[i][j + 1].value === grid[i][j].value) {
-            grid[i][j + 1].value += grid[i][j].value;
-            grid[i][j + 1].mergeable = false;
-            grid[i][j].value = '';
+          if(grid.board[i][j + 1].value > 0 && 
+             grid.board[i][j + 1].mergeable === true &&
+             grid.board[i][j + 1].value === grid.board[i][j].value) {
+            grid.board[i][j + 1].value += grid.board[i][j].value;
+            grid.board[i][j + 1].mergeable = false;
+            grid.board[i][j].value = '';
           }
           //if the next tile is empty
           //set that tile to the current value
-          if(grid[i][j + 1].value === '') {
-            grid[i][j + 1].value = grid[i][j].value;
-            grid[i][j].value = '';
+          if(grid.board[i][j + 1].value === '') {
+            grid.board[i][j + 1].value = grid.board[i][j].value;
+            grid.board[i][j].value = '';
           }
         }
       } 
@@ -173,33 +175,33 @@ angular.module('component.2048').factory('Service2048', function() {
   }
 
   function upShift(grid) {
-    var gridLength = grid.length;
+    var gridLength = grid.board.length;
     for(var i = 0; i < gridLength; i++) {
       for(var j = 0; j < gridLength; j++) {
         //guard against out of bounds errors
         if(i > 0) {
           //prevent doublemerge
-          if(grid[i - 1][j].value > 0 &&
-             grid[i - 1][j].mergeable === true &&
-             grid[i][j].value !== '' &&
-             grid[i - 1][j].value !== grid[i][j].value) {
-            grid[i - 1][j].mergeable = false;
+          if(grid.board[i - 1][j].value > 0 &&
+             grid.board[i - 1][j].mergeable === true &&
+             grid.board[i][j].value !== '' &&
+             grid.board[i - 1][j].value !== grid.board[i][j].value) {
+            grid.board[i - 1][j].mergeable = false;
           }
           //if the next tile is a number with
           //an equal value and mergeable = true
           //merge values and set mergeable to false 
-          if(grid[i - 1][j].value > 0 && 
-             grid[i - 1][j].mergeable === true &&
-             grid[i - 1][j].value === grid[i][j].value) {
-            grid[i - 1][j].value += grid[i][j].value;
-            grid[i - 1][j].mergeable = false;
-            grid[i][j].value = '';
+          if(grid.board[i - 1][j].value > 0 && 
+             grid.board[i - 1][j].mergeable === true &&
+             grid.board[i - 1][j].value === grid.board[i][j].value) {
+            grid.board[i - 1][j].value += grid.board[i][j].value;
+            grid.board[i - 1][j].mergeable = false;
+            grid.board[i][j].value = '';
           }
           //if the next tile is empty
           //set that tile to the current value
-          if(grid[i - 1][j].value === '') {
-            grid[i - 1][j].value = grid[i][j].value;
-            grid[i][j].value = '';
+          if(grid.board[i - 1][j].value === '') {
+            grid.board[i - 1][j].value = grid.board[i][j].value;
+            grid.board[i][j].value = '';
           }
         }
       } 
@@ -208,33 +210,33 @@ angular.module('component.2048').factory('Service2048', function() {
   }
 
   function downShift(grid) {
-    var gridLength = grid.length-1;
+    var gridLength = grid.board.length-1;
     for(var i = gridLength; i >= 0; i--) {
       for(var j = gridLength; j >= 0; j--) {
         //guard against out of bounds errors
         if(i < gridLength) {
           //prevent doublemerge
-          if(grid[i + 1][j].value > 0 &&
-             grid[i + 1][j].mergeable === true &&
-             grid[i][j].value !== '' &&
-             grid[i + 1][j].value !== grid[i][j].value) {
-            grid[i + 1][j].mergeable = false;
+          if(grid.board[i + 1][j].value > 0 &&
+             grid.board[i + 1][j].mergeable === true &&
+             grid.board[i][j].value !== '' &&
+             grid.board[i + 1][j].value !== grid.board[i][j].value) {
+            grid.board[i + 1][j].mergeable = false;
           }
           //if the next tile is a number with
           //an equal value and mergeable = true
           //merge values and set mergeable to false 
-          if(grid[i + 1][j].value > 0 && 
-             grid[i + 1][j].mergeable === true &&
-             grid[i + 1][j].value === grid[i][j].value) {
-            grid[i + 1][j].value += grid[i][j].value;
-            grid[i + 1][j].mergeable = false;
-            grid[i][j].value = '';
+          if(grid.board[i + 1][j].value > 0 && 
+             grid.board[i + 1][j].mergeable === true &&
+             grid.board[i + 1][j].value === grid.board[i][j].value) {
+            grid.board[i + 1][j].value += grid.board[i][j].value;
+            grid.board[i + 1][j].mergeable = false;
+            grid.board[i][j].value = '';
           }
           //if the next tile is empty
           //set that tile to the current value
-          if(grid[i + 1][j].value === '') {
-            grid[i + 1][j].value = grid[i][j].value;
-            grid[i][j].value = '';
+          if(grid.board[i + 1][j].value === '') {
+            grid.board[i + 1][j].value = grid.board[i][j].value;
+            grid.board[i][j].value = '';
           }
         }
       } 
